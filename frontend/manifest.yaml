@@ -53,7 +53,7 @@ data:
             }
 
             location /api/ {
-        	          proxy_pass http://backend:8080/;
+        	    proxy_pass http://backend:8080/;
     	      }
 
             error_page 500 502 503 504 /50x.html;
@@ -87,14 +87,14 @@ spec:
         tier: web
         project: expense
     spec:
-      containers:
       volumes:
       - name: nginx
         configMap:
           name: nginx
           items:
-          - key: nginx.conf
-            path: nginx.conf
+            - key: nginx.conf
+              path: nginx.conf
+      containers:
       - name: nginx
         image: nagendra80/frontend:1.2.0
         resources:
@@ -109,10 +109,11 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-          - name: nginx
-            mountPath: /etc/nginx/nginx.conf
-            subPath: nginx.conf
-            readOnly: true
+        - name: nginx
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
+
 ---
 kind: Service
 apiVersion: v1
