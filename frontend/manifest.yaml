@@ -1,3 +1,4 @@
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -45,12 +46,7 @@ data:
             root         /usr/share/nginx/html;
 
             # Load configuration files for the default server block.
-            include /etc/nginx/default.d/*.conf;
-
-          location /api/ {
-              proxy_pass http://backend:8080/;
-          }
-          
+            include /etc/nginx/default.d/*.conf;          
           
             error_page 404 /404.html;
                 location = /40x.html {
